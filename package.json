@@ -1,6 +1,6 @@
 {
   "name": "hexo-tag-scripture",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A tag plugin for Hexo to easily generate Scripture references linked to Bible Gateway",
   "main": "index.js",
   "scripts": {
