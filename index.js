@@ -65,7 +65,7 @@
  * Generate a Scripture reference from the given arguments
  * @param {string[]} args The arguments to the tag, the way they are passed to the tag
  */
-let generateScriptureReference = arg => {
+let generateScriptureReference = args => {
   let rExtra = /\s*extra:(\w+)/i
   let rVersion = /\s*version:(\w+)/i
   let rShowVersion = /\s*show-version:(\w+)/i
