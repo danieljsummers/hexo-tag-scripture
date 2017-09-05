@@ -6,17 +6,17 @@
  * is an inline link to Bible Gateway, where the text is the reference.  The
  * syntax for this one is (using John 3:16 as an example):
  * 
- * {% scripture John 3:16 [version:ver] [extra:x] [show-version:true|false] %}
+ * {% scripture John 3:16 [version:ver] [extra:x] [show-version] %}
  * 
  * The "version" should be an abbreviation supported by Bible Gateway; the
  * plugin defaults to "esv" (ESV - English Standard Version). "extra" will put
  * whatever is after it (until the next space) directly behind the reference;
  * it can be used where you quote only part of the verse, and you want "a". The
- * "show-version" parameter, if present and "true", will put a space, and the
- * version abbreviation in parenthesis after the linked reference. So, to fill
- * in a complete example:
+ * "show-version" parameter, if present, will put a space, and the version
+ * abbreviation in parenthesis after the linked reference. So, to fill in a
+ * complete example:
  * 
- * {% scripture John 3:16 version:csb extra:a show-version:true %}
+ * {% scripture John 3:16 version:csb extra:a show-version %}
  * 
  * ...would result in...
  * 
@@ -43,7 +43,7 @@
  * content, with a linked reference citation. The tag supports all the options
  * and defaults of the inline tag.
  * 
- * {% bible John 3:16 [version:ver] [extra:x] [show-version:true|false] %}
+ * {% bible John 3:16 [version:ver] [extra:x] [show-version] %}
  * text
  * {% endbible %}
  * 
@@ -68,7 +68,7 @@
 let generateScriptureReference = args => {
   let rExtra = /\s*extra:(\w+)/i
   let rVersion = /\s*version:(\w+)/i
-  let rShowVersion = /\s*show-version:(\w+)/i
+  let rShowVersion = /\s*show-version/i
 
   let arg = args.join(' ')
   let version = 'ESV'
@@ -83,8 +83,8 @@ let generateScriptureReference = args => {
   }
 
   if (rShowVersion.test(arg)) {
-    arg = arg.replace(rShowVersion, (match, p1) => {
-      versionText = p1 === 'true' ? ` <em>(${version})</em>` : ''
+    arg = arg.replace(rShowVersion, () => {
+      versionText = ` <em>(${version})</em>`
       return ''
     })
   }
