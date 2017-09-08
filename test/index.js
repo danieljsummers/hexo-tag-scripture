@@ -11,6 +11,12 @@ describe('Scripture References', () => {
     result.should.eq('<a href="https://www.biblegateway.com/passage/?search=Genesis+1:1&amp;version=ESV" title="Read Genesis 1:1 (ESV) at Bible Gateway">Genesis 1:1</a>')
   })
 
+  it('replaces all spaces with "+"', () => {
+    let result = scrip.generateReference(['Song of Solomon 2:7'])
+    result.should.exist
+    result.should.include('?search=Song+of+Solomon+2:7')
+  })
+
   it('shows the version if specified', () => {
     let result = scrip.generateReference(['James 3:2', 'show-version'])
     result.should.exist
