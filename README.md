@@ -1,6 +1,8 @@
 # hexo-tag-scripture
 A Hexo tag plugin to easily link Scripture references to Bible Gateway
 
+[![npm](https://img.shields.io/npm/v/hexo-tag-scripture.svg?style=plastic)]() [![AppVeyor](https://img.shields.io/appveyor/ci/danieljsummers/hexo-tag-scripture.svg?style=plastic)]()
+
 ## Installation
 
 ```
