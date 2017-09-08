@@ -60,64 +60,23 @@
  * [cite]- [a href="link"]John 3:16[/a]a[/cite]
  * [/blockquote]
  */
+var scrip = require('lib/scripture')
 
-/**
- * Generate a Scripture reference from the given arguments
- * @param {string[]} args The arguments to the tag, the way they are passed to the tag
- */
-let generateScriptureReference = args => {
-  let rExtra = /\s*extra:(\w+)/i
-  let rVersion = /\s*version:(\w+)/i
-  let rShowVersion = /\s*show-version/i
-
-  let arg = args.join(' ')
-  let version = 'ESV'
-  let versionText = ''
-  let extraText = ''
-
-  if (rVersion.test(arg)) {
-    arg = arg.replace(rVersion, (match, p1) => {
-      version = p1.toUpperCase()
-      return ''
-    })
-  }
-
-  if (rShowVersion.test(arg)) {
-    arg = arg.replace(rShowVersion, () => {
-      versionText = ` <em>(${version})</em>`
-      return ''
-    })
-  }
-
-  if (rExtra.test(arg)) {
-    arg = arg.replace(rExtra, (match, p1) => {
-      extraText = p1
-      return ''
-    })
-  }
-  
-  let reference = arg.trim()
-  let urlReference = reference.replace(' ', '+')
-
-  return `<a href="https://www.biblegateway.com/passage/?search=${urlReference}&amp;version=${version}" `
-    + `title="Read ${reference} (${version}) at Bible Gateway">${reference}</a>${extraText}${versionText}`
-}
-
-let scriptureReference = (args, content) => generateScriptureReference(args)
+let scripture = (args, content) => scrip.generateReference(args)
 let tagOpts = { async: true, ends: false }
 
-hexo.extend.tag.register('scripture', scriptureReference, tagOpts)
-hexo.extend.tag.register('csb',  (args, content) => scriptureReference(args.concat(['version:csb']),  content), tagOpts)
-hexo.extend.tag.register('esv',  (args, content) => scriptureReference(args.concat(['version:esv']),  content), tagOpts)
-hexo.extend.tag.register('hcsb', (args, content) => scriptureReference(args.concat(['version:hcsb']), content), tagOpts)
-hexo.extend.tag.register('kjv',  (args, content) => scriptureReference(args.concat(['version:kjv']),  content), tagOpts)
-hexo.extend.tag.register('niv',  (args, content) => scriptureReference(args.concat(['version:niv']),  content), tagOpts)
-hexo.extend.tag.register('nkjv', (args, content) => scriptureReference(args.concat(['version:nkjv']), content), tagOpts)
+let renderMarkdown = content => hexo.render.renderSync({ text: content, engine: 'markdown' })
 
-hexo.extend.tag.register('bible', (args, content) => {
-  let quote = hexo.render.renderSync({ text: content, engine: 'markdown' })
-  return `<blockquote class="bible">${quote}<cite>&mdash; ${generateScriptureReference(args)}</cite></blockquote>`
-}, {
-  async: true,
-  ends: true
-});
+hexo.extend.tag.register('scripture', scripture, tagOpts)
+hexo.extend.tag.register('csb',  (args, content) => scripture(args.concat(['version:csb']),  content), tagOpts)
+hexo.extend.tag.register('esv',  (args, content) => scripture(args.concat(['version:esv']),  content), tagOpts)
+hexo.extend.tag.register('hcsb', (args, content) => scripture(args.concat(['version:hcsb']), content), tagOpts)
+hexo.extend.tag.register('kjv',  (args, content) => scripture(args.concat(['version:kjv']),  content), tagOpts)
+hexo.extend.tag.register('niv',  (args, content) => scripture(args.concat(['version:niv']),  content), tagOpts)
+hexo.extend.tag.register('nkjv', (args, content) => scripture(args.concat(['version:nkjv']), content), tagOpts)
+
+hexo.extend.tag.register('bible',
+  (args, content) => scripture.generateBlockquote(args, content, renderMarkdown), {
+    async: true,
+    ends: true
+  })
