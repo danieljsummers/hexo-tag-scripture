@@ -1,7 +1,7 @@
 # hexo-tag-scripture
 A Hexo tag plugin to easily link Scripture references to Bible Gateway
 
-[![npm](https://img.shields.io/npm/v/hexo-tag-scripture.svg?style=plastic)]() [![AppVeyor](https://img.shields.io/appveyor/ci/danieljsummers/hexo-tag-scripture.svg?style=plastic)]()
+[![npm](https://img.shields.io/npm/v/hexo-tag-scripture.svg)](//www.npmjs.com/package/hexo-tag-scripture) [![AppVeyor](https://img.shields.io/appveyor/ci/danieljsummers/hexo-tag-scripture.svg)](//ci.appveyor.com/project/danieljsummers/hexo-tag-scripture) [![Bless](https://cdn.rawgit.com/LunaGao/BlessYourCodeTag/master/tags/god.svg)](https://github.com/LunaGao/BlessYourCodeTag)
 
 ## Installation
 
@@ -80,7 +80,7 @@ Other versions that Bible Gateway supports would be easy; create an issue (or PR
 
 ## Example
 
-This plugin was originally developed as I migrated the (now inaccurately named) [Daniel's Weekly Devotions](https://devotions.summershome.org) site, where you can see its results; all actual Scripture references and blockquotes use this plugin to generate them.
+This plugin was originally developed as I migrated the (now inaccurately named) [Daniel's Weekly Devotions](https://devotions.summershome.org) site, where you can see its results; all actual Scripture references and blockquotes use this plugin to generate them. An overview of how this plugin was developed can be found on the [DJS Consulting Tech Blog](https://techblog.djs-consulting.com/2017/writing-a-hexo-tag-plugin.html).
 
 ## License
 
