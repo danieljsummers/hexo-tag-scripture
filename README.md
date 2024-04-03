@@ -1,3 +1,7 @@
+## NOTE _(April 2024)_
+
+To the best of my knowledge, this is still a valid project. I do not use Hexo day-to-day as I did when I created this library. If it needs attention, please open an issue!
+
 # hexo-tag-scripture
 A Hexo tag plugin to easily link Scripture references to Bible Gateway
 
